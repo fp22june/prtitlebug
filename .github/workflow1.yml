@@ -1,0 +1,13 @@
+name: 'Workflow1'
+on:
+  pull_request: 
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - name: step1
+      run: |
+        FOO="prefix_$( tr '":<>|*?/\\’' '_' <<< "${{ github.event.pull_request.title }}" )_suffix"
+        BAR="$(tr '":<>|*?/\\’' '_' <<< "$FOO")"
+        echo "FOO=$FOO"
+        echo "BAR=$BAR"
